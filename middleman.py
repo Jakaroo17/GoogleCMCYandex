@@ -1,6 +1,6 @@
 from getcmcdata import CMC
 from getyandexdata import Yandex
-from quickstart import GoogleDocs
+from googledocs import GoogleDocs
 
 #Список ликвидностей для поиска цены 
 сryptos = ['dogecoin','ethereum','bittorrent','bitcoin','binance-coin','bearhunt','tokocrypto','moonbear-finance','bumoon','redshiba','dent']
@@ -15,7 +15,6 @@ bonds = ['RU000A0JTMK9']
 testcmcfunc = CMC()
 tesyandexfunc = Yandex()
 testgoogledocs = GoogleDocs()
-
 
 # Заполнения массива ценами за крипту
 crypto_price=[]

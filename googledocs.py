@@ -29,7 +29,7 @@ class GoogleDocs():
         ).execute()
         return values
 
-    def write_to_sheet(self,sheet:str,StartRow:str,EndRow:str,parameters,Dimension:str = 'ROWS'):
+    def write_to_sheets(self,sheet:str,StartRow:str,EndRow:str,parameters,Dimension:str = 'ROWS'):
         values = self.service.spreadsheets().values().batchUpdate(
             spreadsheetId=self.spreadsheet_id,
             body={
@@ -46,8 +46,23 @@ class GoogleDocs():
     sheet - страница, startletter - начальная буква,
     endletter - конечная буква. 
     element - искомый элемент"""
-    def find_by_row(self,sheet:str,startletter:str,endletter:str,element:str):
-        pass
+    def find_by_row(self,sheet:str,number:int,startletter:str,endletter:str,element:str):
+        i = ord(startletter)
+        while i != ord(endletter):
+            values = self.service.spreadsheets().values().get(
+                spreadsheetId=self.spreadsheet_id,
+                range=f"'{sheet}'!{chr(i)}{number}:{chr(i)}{number}",
+                majorDimension=f'ROWS'
+            ).execute()
+            try:
+               
+                if values['values'][0][0] == element:
+                    return f'{chr(i)}{number}'     
+            except Exception as e:
+                print(e)
+            i+=1
+        return None
+
 
     """Метод поиска в какой ячейке находится необходимая информация по столбцам
     sheet - страница, startnumber - начальное число,
@@ -63,7 +78,7 @@ class GoogleDocs():
                 majorDimension=f'COLUMNS'
             ).execute()
             try:
-                print(values['values'][0][0],element,values['values'][0][0] == element)
+               
                 if values['values'][0][0] == element:
                     return f'{letter}{i}'     
             except Exception as e:
@@ -71,5 +86,5 @@ class GoogleDocs():
             i+=1
         return None
 
-# testgoogledocs = GoogleDocs()
-# print(testgoogledocs.FindByColumn('Накопления','B',50,'126,29'))
+
+
