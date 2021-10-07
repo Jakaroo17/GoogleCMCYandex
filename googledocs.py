@@ -77,7 +77,6 @@ class GoogleDocs():
                 range=f"'{sheet}'!{letter}{i}:{letter}{i}",
                 majorDimension=f'COLUMNS'
             ).execute()
-            print(values)
             try:
                
                 if values['values'][0][0] == element:
@@ -86,5 +85,6 @@ class GoogleDocs():
                 print(e)
             i+=1
         return None
+
 
 
