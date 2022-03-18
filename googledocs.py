@@ -7,11 +7,14 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 class GoogleDocs():
     # Файл, полученный в Google Developer Console
+    # Credential file from google developer console
     CREDENTIALS_FILE = 'creds.json'
     # ID Google Sheets документа (можно взять из его URL)
+    # Google Sheets document id (can be taken from url)
     spreadsheet_id = '1daDN7zLsMCaJk-Y0XtOg4KSXwU55JM2QYVIh6uo8yEA'
 
     # Авторизуемся и получаем service — экземпляр доступа к API
+    # Loging in and getting instance access for API
     credentials = ServiceAccountCredentials.from_json_keyfile_name(
         CREDENTIALS_FILE,
         ['https://www.googleapis.com/auth/spreadsheets',
@@ -20,7 +23,9 @@ class GoogleDocs():
     service = apiclient.discovery.build('sheets', 'v4', http = httpAuth)
 
     """Метод чтения из файла. sheet - нужная страница. StartRow - начала диапазона. EndRow - конец диапазона. Dimension - 
-    мерность выдачи файла"""
+    мерность выдачи информации"""
+    """Method reading info from file. Sheet - desired page. StartRow - beginning of range. EndRow - end of range.
+    Dimension - dimension of data"""
     def get_data_from_sheets(self,sheet:str,StartRow:str,EndRow:str,Dimension:str = 'ROWS'):
         values = self.service.spreadsheets().values().get(
             spreadsheetId=self.spreadsheet_id,
