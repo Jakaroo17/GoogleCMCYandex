@@ -2,10 +2,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
+creds.json
 
 # C extensions
 *.so
-
+creds.json
 # Distribution / packaging
 .Python
 build/

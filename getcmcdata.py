@@ -1,10 +1,9 @@
-from getter import Getter
 import requests
 from bs4 import BeautifulSoup
 
 # Класс-парсер с единственным методом получения цены по криптовалюте с биржи CoinmarketCap
 # Class-Parser with only method that gets cryptos price from CoinmarketCap
-class CMC(Getter):
+class CMC():
     # Метод получает название криптовалюты и переходит на страницу с ней в CoinMarketCap
     # Method that accepts cryptoname and opens website with its price
     def getPrice(self,param: str):
